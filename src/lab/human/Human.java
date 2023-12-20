@@ -128,7 +128,6 @@ public class Human {
 
     public void awake() {
         isSleeping = false;
-        setPhysicalPosition(PhysicalPosition.STANDING);
     }
 
     public Vomit threwUp() {
