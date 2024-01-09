@@ -32,6 +32,8 @@ public class Human {
 
     private float alcoholLevel = 0;
 
+    private boolean positionBlocked = false;
+
     public Human(String name) {
         this.name = name;
     }
@@ -68,6 +70,18 @@ public class Human {
         this.alcoholLevel = Utils.constrain(alcoholLevel, 0, 5);
     }
 
+    public void blockPosition() {
+        positionBlocked = true;
+    }
+
+    public void unblockPosition() {
+        positionBlocked = false;
+    }
+
+    public boolean isPositionBlocked() {
+        return positionBlocked;
+    }
+
     public PhysicalPosition getPhysicalPosition() {
         return physicalPosition;
     }
@@ -81,8 +95,8 @@ public class Human {
     }
 
     public void goTo(Room location) {
-        if (isSleeping()) { // is position blocked
-            throw new RuntimeException("Для начала необходимо проснуться.");
+        if (isPositionBlocked()) {
+            throw new RuntimeException("Позиция человека заблокирована.");
         }
         this.location = location;
     }

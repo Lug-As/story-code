@@ -1,75 +1,41 @@
 package ru.webwitcher.uni.lab3.furniture;
 
+import ru.webwitcher.uni.lab3.Semaphore;
 import ru.webwitcher.uni.lab3.enums.PhysicalPosition;
 import ru.webwitcher.uni.lab3.enums.Room;
 import ru.webwitcher.uni.lab3.human.Human;
 
-import java.util.HashSet;
-import java.util.Set;
-
 public class Bed extends Furniture {
-    private int totalSeats = 1;
-
-    private final Set<Human> users = new HashSet<>();
-
-    public Bed(Room room) {
-        super(room);
-    }
+    private final Semaphore<Human> semaphore;
 
     public Bed(Room room, int totalSeats) {
         super(room);
-        this.totalSeats = totalSeats;
+        this.semaphore = new Semaphore<>(totalSeats);
     }
 
-    public int getTotalSeats() {
-        return totalSeats;
-    }
-
-    public int getTakenSeats() {
-        return users.size();
-    }
-
-    public int getFreeSeats() {
-        return getTotalSeats() - getTakenSeats();
-    }
-
-    public Set<Human> getUsers() {
-        return users;
-    }
-
-    public boolean isFree() {
-        return getFreeSeats() > 0;
-    }
-
-    public boolean isBusy() {
-        return !isFree();
+    public Bed(Room room) {
+        this(room, 1);
     }
 
     public void lieDownOn(Human user) {
-        takeSeat(user);
+        semaphore.occupy(user);
         user.setPhysicalPosition(PhysicalPosition.LYING);
+        user.blockPosition();
     }
 
     public void sitDownOn(Human user) {
-        takeSeat(user);
+        semaphore.occupy(user);
         user.setPhysicalPosition(PhysicalPosition.SITTING);
-    }
-
-    private void takeSeat(Human user) {
-        if (!users.contains(user)) {
-            if (isBusy()) {
-                throw new RuntimeException("Кровать занята"); // можно вынести логику занятия мест в семафор
-            }
-            users.add(user);
-        }
+        user.blockPosition();
     }
 
     public void getUp(Human user) {
         freeUpSeat(user);
         user.setPhysicalPosition(PhysicalPosition.STANDING);
+        user.unblockPosition();
     }
 
     private void freeUpSeat(Human user) {
-        users.remove(user);
+        semaphore.free(user);
     }
 }
