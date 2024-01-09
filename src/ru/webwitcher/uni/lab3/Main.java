@@ -8,6 +8,9 @@ import ru.webwitcher.uni.lab3.food.Beer;
 import ru.webwitcher.uni.lab3.furniture.Bed;
 import ru.webwitcher.uni.lab3.furniture.Mirror;
 import ru.webwitcher.uni.lab3.furniture.Toilet;
+import ru.webwitcher.uni.lab3.furniture.service.BedService;
+import ru.webwitcher.uni.lab3.furniture.service.MirrorService;
+import ru.webwitcher.uni.lab3.furniture.service.ToiletService;
 import ru.webwitcher.uni.lab3.human.Dream;
 import ru.webwitcher.uni.lab3.human.Human;
 
@@ -32,13 +35,17 @@ public class Main {
         Toilet toilet = new Toilet(bathroom);
         Mirror mirror = new Mirror(bathroom);
 
+        BedService bedService = new BedService(bed);
+        ToiletService toiletService = new ToiletService(toilet);
+        MirrorService mirrorService = new MirrorService(mirror);
+
         Human rachel = new Human("Рэчел");
         rachel.goTo(bathroom);
-        mirror.cover(rachel);
+        mirrorService.coverMirror(rachel);
         rachel.goTo(null);
 
         luis.goTo(bedroom);
-        bed.lieDownOn(luis);
+        bedService.lieDownOnBed(luis);
         luis.sleep();
 
         Random random = new Random();
@@ -49,11 +56,12 @@ public class Main {
         luis.awake();
         luis.setHealth(15);
         luis.setEnergy(10);
-        bed.getUp(luis);
+        bedService.getUpFromBed(luis);
 
         luis.goTo(bathroom);
         luis.setPhysicalPosition(PhysicalPosition.KNELT);
-        toilet.fill(luis, luis.threwUp());
+
+        toiletService.fillToilet(luis, luis.threwUp());
         while (luis.getEnergy() < 5) {
             Thread.sleep(100);
             if (random.nextBoolean()) {
@@ -62,17 +70,17 @@ public class Main {
         }
         luis.setPhysicalPosition(PhysicalPosition.STANDING);
 
-        toilet.flush(luis);
-        boolean result = mirror.lookIn(luis);
+        toiletService.flushToilet(luis);
+        boolean result = mirrorService.lookInMirror(luis);
         if (!result) {
             luis.setCurrentEmotion(Emotion.SAD);
         }
 
         luis.goTo(bedroom);
-        bed.lieDownOn(luis);
+        bedService.lieDownOnBed(luis);
         luis.promise(ImpossiblePromise.STOP_DRINKING_BEER);
         luis.setCurrentEmotion(Emotion.DEPRESSIVE);
-        bed.sitDownOn(luis);
+        bedService.sitDownOnBed(luis);
         for (int i = dreams.size() - 1; i >= 0; i--) {
             Dream dream = dreams.get(i);
             System.out.println(dream + " не получится");

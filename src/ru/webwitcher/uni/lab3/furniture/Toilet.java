@@ -1,27 +1,29 @@
 package ru.webwitcher.uni.lab3.furniture;
 
+import ru.webwitcher.uni.lab3.Container;
 import ru.webwitcher.uni.lab3.enums.Room;
-import ru.webwitcher.uni.lab3.human.Human;
 
-public class Toilet extends Furniture {
-    private Object container = null;
+public class Toilet extends Furniture implements Container<Object> {
+    private Object content = null;
 
     public Toilet(Room room) {
         super(room);
     }
 
-    public Object getContainer() {
-        return container;
+    public Object getContent() {
+        return content;
     }
 
-    public void fill(Human user, Object object) {
-        checkLocation(user);
-        container = object;
+    public void fill(Object o) {
+        content = o;
     }
 
-    public void flush(Human user) {
-        checkLocation(user);
-        container = null;
+    public void empty() {
+        content = null;
         System.gc();
+    }
+
+    public boolean isEmpty() {
+        return content == null;
     }
 }

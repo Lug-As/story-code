@@ -14,21 +14,15 @@ public class Mirror extends Furniture {
         return covered;
     }
 
-    public void setCovered(Human user, boolean covered) {
-        checkLocation(user);
-        this.covered = covered;
-    }
-
     public void cover(Human user) {
-        setCovered(user, true);
+        this.covered = true;
     }
 
     public void uncover(Human user) {
-        setCovered(user, false);
+        this.covered = false;
     }
 
     public boolean lookIn(Human user) {
-        checkLocation(user);
         return !covered;
     }
 }

@@ -57,9 +57,8 @@ public class Bed extends Furniture {
 
     private void takeSeat(Human user) {
         if (!users.contains(user)) {
-            checkLocation(user);
             if (isBusy()) {
-                throw new RuntimeException("Кровать занята"); // можно вынести логику занятия мест в кастомный семафор
+                throw new RuntimeException("Кровать занята"); // можно вынести логику занятия мест в семафор
             }
             users.add(user);
         }

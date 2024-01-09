@@ -81,7 +81,7 @@ public class Human {
     }
 
     public void goTo(Room location) {
-        if (isSleeping()) {
+        if (isSleeping()) { // is position blocked
             throw new RuntimeException("Для начала необходимо проснуться.");
         }
         this.location = location;
