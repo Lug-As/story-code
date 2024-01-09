@@ -1,4 +1,4 @@
-package lab.human;
+package ru.webwitcher.uni.lab3.human;
 
 public class Dream {
     private String essence;

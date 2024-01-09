@@ -1,4 +1,4 @@
-package lab.enums;
+package ru.webwitcher.uni.lab3.enums;
 
 import java.util.Objects;
 

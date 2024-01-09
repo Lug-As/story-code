@@ -1,6 +1,6 @@
-package lab.food;
+package ru.webwitcher.uni.lab3.food;
 
-import lab.human.Human;
+import ru.webwitcher.uni.lab3.human.Human;
 
 public class Beer implements Food {
     public void digest(Human consumer) {

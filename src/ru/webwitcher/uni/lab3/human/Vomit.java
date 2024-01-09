@@ -1,6 +1,6 @@
-package lab.human;
+package ru.webwitcher.uni.lab3.human;
 
-import lab.food.Food;
+import ru.webwitcher.uni.lab3.food.Food;
 
 public class Vomit {
     private final Food structure;

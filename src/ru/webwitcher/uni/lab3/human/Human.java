@@ -1,11 +1,11 @@
-package lab.human;
+package ru.webwitcher.uni.lab3.human;
 
-import lab.enums.Emotion;
-import lab.enums.ImpossiblePromise;
-import lab.enums.PhysicalPosition;
-import lab.enums.Room;
-import lab.food.Food;
-import lab.utils.Utils;
+import ru.webwitcher.uni.lab3.enums.Emotion;
+import ru.webwitcher.uni.lab3.enums.ImpossiblePromise;
+import ru.webwitcher.uni.lab3.enums.PhysicalPosition;
+import ru.webwitcher.uni.lab3.enums.Room;
+import ru.webwitcher.uni.lab3.food.Food;
+import ru.webwitcher.uni.lab3.utils.Utils;
 
 import java.util.*;
 

@@ -1,7 +1,7 @@
-package lab.furniture;
+package ru.webwitcher.uni.lab3.furniture;
 
-import lab.enums.Room;
-import lab.human.Human;
+import ru.webwitcher.uni.lab3.enums.Room;
+import ru.webwitcher.uni.lab3.human.Human;
 
 public class Mirror extends Furniture {
     private boolean covered = false;

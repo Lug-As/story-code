@@ -1,8 +1,8 @@
-package lab.furniture;
+package ru.webwitcher.uni.lab3.furniture;
 
-import lab.enums.PhysicalPosition;
-import lab.enums.Room;
-import lab.human.Human;
+import ru.webwitcher.uni.lab3.enums.PhysicalPosition;
+import ru.webwitcher.uni.lab3.enums.Room;
+import ru.webwitcher.uni.lab3.human.Human;
 
 import java.util.HashSet;
 import java.util.Set;

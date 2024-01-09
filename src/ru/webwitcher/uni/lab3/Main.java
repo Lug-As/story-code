@@ -1,13 +1,15 @@
-import lab.enums.Emotion;
-import lab.enums.ImpossiblePromise;
-import lab.enums.PhysicalPosition;
-import lab.enums.Room;
-import lab.food.Beer;
-import lab.furniture.Bed;
-import lab.furniture.Mirror;
-import lab.furniture.Toilet;
-import lab.human.Dream;
-import lab.human.Human;
+package ru.webwitcher.uni.lab3;
+
+import ru.webwitcher.uni.lab3.enums.Emotion;
+import ru.webwitcher.uni.lab3.enums.ImpossiblePromise;
+import ru.webwitcher.uni.lab3.enums.PhysicalPosition;
+import ru.webwitcher.uni.lab3.enums.Room;
+import ru.webwitcher.uni.lab3.food.Beer;
+import ru.webwitcher.uni.lab3.furniture.Bed;
+import ru.webwitcher.uni.lab3.furniture.Mirror;
+import ru.webwitcher.uni.lab3.furniture.Toilet;
+import ru.webwitcher.uni.lab3.human.Dream;
+import ru.webwitcher.uni.lab3.human.Human;
 
 import java.util.List;
 import java.util.Random;

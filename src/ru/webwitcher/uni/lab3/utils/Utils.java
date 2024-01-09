@@ -1,4 +1,4 @@
-package lab.utils;
+package ru.webwitcher.uni.lab3.utils;
 
 public class Utils {
     public static int constrain(int value, int min, int max) {
