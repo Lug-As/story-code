@@ -1,6 +1,5 @@
 package ru.webwitcher.uni.lab3.furniture;
 
-import ru.webwitcher.uni.lab3.Semaphore;
 import ru.webwitcher.uni.lab3.enums.PhysicalPosition;
 import ru.webwitcher.uni.lab3.enums.Room;
 import ru.webwitcher.uni.lab3.human.Human;

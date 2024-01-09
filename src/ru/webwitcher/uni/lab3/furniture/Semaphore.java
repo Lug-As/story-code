@@ -1,4 +1,4 @@
-package ru.webwitcher.uni.lab3;
+package ru.webwitcher.uni.lab3.furniture;
 
 import java.util.HashSet;
 import java.util.Set;

@@ -1,4 +1,4 @@
-package ru.webwitcher.uni.lab3;
+package ru.webwitcher.uni.lab3.furniture;
 
 public interface Container<T> {
     void fill(T content);
