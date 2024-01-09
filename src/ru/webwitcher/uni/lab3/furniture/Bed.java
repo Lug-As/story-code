@@ -30,12 +30,8 @@ public class Bed extends Furniture {
     }
 
     public void getUp(Human user) {
-        freeUpSeat(user);
+        semaphore.free(user);
         user.setPhysicalPosition(PhysicalPosition.STANDING);
         user.unblockPosition();
-    }
-
-    private void freeUpSeat(Human user) {
-        semaphore.free(user);
     }
 }

@@ -25,6 +25,16 @@ public class Semaphore<U> {
         }
     }
 
+    public boolean canUse(U user) {
+        return users.contains(user);
+    }
+
+    public void ensureCanUse(U user) {
+        if (!canUse(user)) {
+            throw new RuntimeException("Данный пользователь не может использовать ресурс");
+        }
+    }
+
     public void free(U user) {
         users.remove(user);
     }

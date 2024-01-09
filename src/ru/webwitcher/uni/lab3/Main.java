@@ -61,6 +61,7 @@ public class Main {
         luis.goTo(bathroom);
         luis.setPhysicalPosition(PhysicalPosition.KNELT);
 
+        toiletService.occupyToilet(luis);
         toiletService.fillToilet(luis, luis.threwUp());
         while (luis.getEnergy() < 5) {
             Thread.sleep(100);
@@ -71,6 +72,7 @@ public class Main {
         luis.setPhysicalPosition(PhysicalPosition.STANDING);
 
         toiletService.flushToilet(luis);
+        toiletService.freeToilet(luis);
         boolean result = mirrorService.lookInMirror(luis);
         if (!result) {
             luis.setCurrentEmotion(Emotion.SAD);

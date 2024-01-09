@@ -8,13 +8,24 @@ public class ToiletService extends FurnitureService<Toilet> {
         super(furniture);
     }
 
+    public void occupyToilet(Human user) {
+        checkLocation(user);
+        furniture.occupy(user);
+    }
+
+    public void freeToilet(Human user) {
+        furniture.free(user);
+    }
+
     public void fillToilet(Human user, Object object) {
         checkLocation(user);
+        furniture.ensureCanUse(user);
         furniture.fill(object);
     }
 
     public void flushToilet(Human user) {
         checkLocation(user);
+        furniture.ensureCanUse(user);
         furniture.empty();
     }
 }
