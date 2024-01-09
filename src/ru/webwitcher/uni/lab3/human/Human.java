@@ -150,8 +150,7 @@ public class Human {
     }
 
     public void consume(Food food) {
-//        addEnergy(food.getEnergy());
-//        addHealth(food.getHealth());
+        food.digest(this);
         belly.add(food);
     }
 }
