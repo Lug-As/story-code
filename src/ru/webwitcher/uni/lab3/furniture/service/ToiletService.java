@@ -1,5 +1,6 @@
 package ru.webwitcher.uni.lab3.furniture.service;
 
+import ru.webwitcher.uni.lab3.furniture.ResourceIsNotAvailableException;
 import ru.webwitcher.uni.lab3.furniture.Toilet;
 import ru.webwitcher.uni.lab3.human.Human;
 
@@ -8,7 +9,7 @@ public class ToiletService extends FurnitureService<Toilet> {
         super(furniture);
     }
 
-    public void occupyToilet(Human user) {
+    public void occupyToilet(Human user) throws ResourceIsNotAvailableException {
         checkLocation(user);
         furniture.occupy(user);
     }

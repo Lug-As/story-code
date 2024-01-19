@@ -29,7 +29,7 @@ public class Toilet extends Furniture implements Container<Object> {
         return content == null;
     }
 
-    public void occupy(Human user) {
+    public void occupy(Human user) throws ResourceIsNotAvailableException {
         semaphore.occupy(user);
         user.blockPosition();
     }

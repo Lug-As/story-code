@@ -16,13 +16,13 @@ public class Bed extends Furniture {
         this(location, 1);
     }
 
-    public void lieDownOn(Human user) {
+    public void lieDownOn(Human user) throws ResourceIsNotAvailableException {
         semaphore.occupy(user);
         user.setPhysicalPosition(PhysicalPosition.LYING);
         user.blockPosition();
     }
 
-    public void sitDownOn(Human user) {
+    public void sitDownOn(Human user) throws ResourceIsNotAvailableException {
         semaphore.occupy(user);
         user.setPhysicalPosition(PhysicalPosition.SITTING);
         user.blockPosition();

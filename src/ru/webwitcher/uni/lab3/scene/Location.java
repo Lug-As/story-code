@@ -40,7 +40,7 @@ public class Location {
     }
 
     private void applyWeatherEffect(Human human) {
-        if (weather.hasEffect()) {
+        if (weather != null && weather.hasEffect()) {
             WeatherEffect effect = weather.getEffect();
             effect.apply(human);
         }

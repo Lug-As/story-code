@@ -16,10 +16,10 @@ public class Semaphore<U> {
         this(1);
     }
 
-    public void occupy(U user) {
+    public void occupy(U user) throws ResourceIsNotAvailableException {
         if (!users.contains(user)) {
             if (isBusy()) {
-                throw new RuntimeException("Мест нет");
+                throw new ResourceIsNotAvailableException();
             }
             users.add(user);
         }

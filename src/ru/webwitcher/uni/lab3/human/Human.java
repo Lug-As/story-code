@@ -5,6 +5,8 @@ import ru.webwitcher.uni.lab3.enums.ImpossiblePromise;
 import ru.webwitcher.uni.lab3.enums.PhysicalPosition;
 import ru.webwitcher.uni.lab3.food.Food;
 import ru.webwitcher.uni.lab3.scene.Location;
+import ru.webwitcher.uni.lab3.thing.CanProtectFromRain;
+import ru.webwitcher.uni.lab3.thing.Thing;
 import ru.webwitcher.uni.lab3.utils.Utils;
 
 import java.util.*;
@@ -30,13 +32,15 @@ public class Human {
 
     private final Map<ImpossiblePromise, Integer> impossiblePromisesCounter = new HashMap<>();
 
-    private final Deque<Food> belly = new LinkedList<>();
+    private final Belly belly = new Belly();
 
     private float alcoholLevel = 0;
 
     private boolean positionBlocked = false;
 
-    public boolean isWet = false;
+    private boolean isWet = false;
+
+    private final List<Thing> things = new ArrayList<>();
 
     public Human(String name) {
         this.name = name;
@@ -110,7 +114,7 @@ public class Human {
 
     public void goTo(Location location) {
         if (isPositionBlocked()) {
-            throw new RuntimeException("Позиция человека заблокирована.");
+            throw new PositionBlockedException();
         }
         if (this.location != null) {
             this.location.removeCharacter(this);
@@ -123,7 +127,7 @@ public class Human {
         return dreams;
     }
 
-    public Deque<Food> getBelly() {
+    public Belly getBelly() {
         return belly;
     }
 
@@ -162,11 +166,24 @@ public class Human {
         isSleeping = false;
     }
 
+    private class Belly {
+        private final Deque<Food> content = new LinkedList<>();
+
+        private Food getLastFood() {
+            return content.pollLast();
+        }
+
+        private void addFood(Food food) {
+            food.digest(Human.this);
+            content.add(food);
+        }
+    }
+
     public Vomit threwUp() {
         setCurrentEmotion(Emotion.DISGUSTED);
         addEnergy(-20);
         addHealth(10);
-        return new Vomit(belly.pollLast());
+        return new Vomit(belly.getLastFood());
     }
 
     public boolean isWet() {
@@ -184,8 +201,12 @@ public class Human {
     }
 
     public boolean isProtectedFromGettingWet() {
-        // true if has a thing that can protect from the rain
-        return new Random().nextBoolean();
+        for (Thing thing : things) {
+            if (thing instanceof CanProtectFromRain) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public void addHealth(int health) {
@@ -200,8 +221,18 @@ public class Human {
         setAlcoholLevel(getAlcoholLevel() + alcoholLevel);
     }
 
+    public List<Thing> getThings() {
+        return things;
+    }
+
     public void consume(Food food) {
-        food.digest(this);
-        belly.add(food);
+        belly.addFood(food);
+    }
+
+    public void say(String speech) {
+        System.out.println(speech);
+    }
+
+    public record Vomit(Food structure) {
     }
 }
