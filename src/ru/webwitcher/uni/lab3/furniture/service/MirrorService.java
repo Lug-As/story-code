@@ -10,16 +10,16 @@ public class MirrorService extends FurnitureService<Mirror> {
 
     public void coverMirror(Human user) {
         checkLocation(user);
-        furniture.cover(user);
+        furniture.cover();
     }
 
     public void uncoverMirror(Human user) {
         checkLocation(user);
-        furniture.uncover(user);
+        furniture.uncover();
     }
 
     public boolean lookInMirror(Human user) {
         checkLocation(user);
-        return furniture.lookIn(user);
+        return furniture.lookIn();
     }
 }

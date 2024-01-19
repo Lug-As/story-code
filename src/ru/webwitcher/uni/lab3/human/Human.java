@@ -127,10 +127,6 @@ public class Human {
         return dreams;
     }
 
-    public Belly getBelly() {
-        return belly;
-    }
-
     public Map<ImpossiblePromise, Integer> getPromisesCounter() {
         return impossiblePromisesCounter;
     }

@@ -26,14 +26,6 @@ public class Location {
         this.parentLocation = parentLocation;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public Weather getWeather() {
-        return weather;
-    }
-
     public void setWeather(Weather weather) {
         this.weather = weather;
         characters.forEach(this::applyWeatherEffect);
@@ -46,10 +38,6 @@ public class Location {
         }
     }
 
-    public Location getParentLocation() {
-        return parentLocation;
-    }
-
     public void addCharacter(Human human) {
         characters.add(human);
         applyWeatherEffect(human);
@@ -57,10 +45,6 @@ public class Location {
 
     public void removeCharacter(Human human) {
         characters.remove(human);
-    }
-
-    public List<Human> getCharactersList() {
-        return new ArrayList<>(characters);
     }
 
     public boolean equals(Object o) {

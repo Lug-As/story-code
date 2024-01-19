@@ -151,24 +151,22 @@ public class Main {
 
         //////////////////
 
-        Scene secondDayScene = new Scene(new Action() {
-            public void action(Scene currentScene) {
-                currentScene.setDateTime(firstDay.plusDays(1));
-                cemetery.setWeather(Weather.CLOUDY);
+        Scene secondDayScene = new Scene(currentScene -> {
+            currentScene.setDateTime(firstDay.plusDays(1));
+            cemetery.setWeather(Weather.CLOUDY);
 
-                Umbrella umbrella1 = new Umbrella(Color.BLACK);
-                Umbrella umbrella2 = new Umbrella(Color.BLACK);
-                Umbrella umbrella3 = new Umbrella(Color.BLACK);
+            Umbrella umbrella1 = new Umbrella(Color.BLACK);
+            Umbrella umbrella2 = new Umbrella(Color.BLACK);
+            Umbrella umbrella3 = new Umbrella(Color.BLACK);
 
-                luis.getThings().add(umbrella1);
-                rachel.getThings().add(umbrella2);
-                funeralDirector.getThings().add(umbrella3);
+            luis.getThings().add(umbrella1);
+            rachel.getThings().add(umbrella2);
+            funeralDirector.getThings().add(umbrella3);
 
-                funeralDirector.say("Пустите детей и не препятствуйте им приходить ко мне...");
+            funeralDirector.say("Пустите детей и не препятствуйте им приходить ко мне...");
 
-                Location nearGrave = new Location("Возле могилы", cemetery);
-                luis.goTo(nearGrave);
-            }
+            Location nearGrave = new Location("Возле могилы", cemetery);
+            luis.goTo(nearGrave);
         });
 
         secondDayScene.play();

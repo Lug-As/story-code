@@ -1,6 +1,5 @@
 package ru.webwitcher.uni.lab3.furniture;
 
-import ru.webwitcher.uni.lab3.human.Human;
 import ru.webwitcher.uni.lab3.scene.Location;
 
 public class Mirror extends Furniture {
@@ -14,15 +13,15 @@ public class Mirror extends Furniture {
         return covered;
     }
 
-    public void cover(Human user) {
+    public void cover() {
         this.covered = true;
     }
 
-    public void uncover(Human user) {
+    public void uncover() {
         this.covered = false;
     }
 
-    public boolean lookIn(Human user) {
-        return !covered;
+    public boolean lookIn() {
+        return !isCovered();
     }
 }
