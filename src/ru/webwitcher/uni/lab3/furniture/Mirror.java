@@ -1,13 +1,13 @@
 package ru.webwitcher.uni.lab3.furniture;
 
-import ru.webwitcher.uni.lab3.enums.Room;
 import ru.webwitcher.uni.lab3.human.Human;
+import ru.webwitcher.uni.lab3.scene.Location;
 
 public class Mirror extends Furniture {
     private boolean covered = false;
 
-    public Mirror(Room room) {
-        super(room);
+    public Mirror(Location location) {
+        super(location);
     }
 
     public boolean isCovered() {

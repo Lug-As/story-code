@@ -1,15 +1,15 @@
 package ru.webwitcher.uni.lab3.furniture;
 
-import ru.webwitcher.uni.lab3.enums.Room;
 import ru.webwitcher.uni.lab3.human.Human;
+import ru.webwitcher.uni.lab3.scene.Location;
 
 public class Toilet extends Furniture implements Container<Object> {
     private Object content = null;
 
     private final Semaphore<Human> semaphore = new Semaphore<>();
 
-    public Toilet(Room room) {
-        super(room);
+    public Toilet(Location location) {
+        super(location);
     }
 
     public Object getContent() {

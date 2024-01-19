@@ -1,19 +1,19 @@
 package ru.webwitcher.uni.lab3.furniture;
 
 import ru.webwitcher.uni.lab3.enums.PhysicalPosition;
-import ru.webwitcher.uni.lab3.enums.Room;
 import ru.webwitcher.uni.lab3.human.Human;
+import ru.webwitcher.uni.lab3.scene.Location;
 
 public class Bed extends Furniture {
     private final Semaphore<Human> semaphore;
 
-    public Bed(Room room, int totalSeats) {
-        super(room);
+    public Bed(Location location, int totalSeats) {
+        super(location);
         this.semaphore = new Semaphore<>(totalSeats);
     }
 
-    public Bed(Room room) {
-        this(room, 1);
+    public Bed(Location location) {
+        this(location, 1);
     }
 
     public void lieDownOn(Human user) {

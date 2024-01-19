@@ -3,14 +3,16 @@ package ru.webwitcher.uni.lab3.human;
 import ru.webwitcher.uni.lab3.enums.Emotion;
 import ru.webwitcher.uni.lab3.enums.ImpossiblePromise;
 import ru.webwitcher.uni.lab3.enums.PhysicalPosition;
-import ru.webwitcher.uni.lab3.enums.Room;
 import ru.webwitcher.uni.lab3.food.Food;
+import ru.webwitcher.uni.lab3.scene.Location;
 import ru.webwitcher.uni.lab3.utils.Utils;
 
 import java.util.*;
 
 public class Human {
     private final String name;
+
+    private boolean isAlive = true;
 
     private boolean isSleeping = false;
 
@@ -20,7 +22,7 @@ public class Human {
 
     private PhysicalPosition physicalPosition = PhysicalPosition.STANDING;
 
-    private Room location;
+    private Location location;
 
     private Emotion currentEmotion = Emotion.NORMAL;
 
@@ -34,12 +36,24 @@ public class Human {
 
     private boolean positionBlocked = false;
 
+    public boolean isWet = false;
+
     public Human(String name) {
         this.name = name;
     }
 
     public String getName() {
         return name;
+    }
+
+    public boolean isAlive() {
+        return isAlive;
+    }
+
+    public void die() {
+        setEnergy(0);
+        setHealth(0);
+        isAlive = false;
     }
 
     public boolean isSleeping() {
@@ -90,15 +104,19 @@ public class Human {
         this.physicalPosition = physicalPosition;
     }
 
-    public Room getLocation() {
+    public Location getLocation() {
         return location;
     }
 
-    public void goTo(Room location) {
+    public void goTo(Location location) {
         if (isPositionBlocked()) {
             throw new RuntimeException("Позиция человека заблокирована.");
         }
+        if (this.location != null) {
+            this.location.removeCharacter(this);
+        }
         this.location = location;
+        location.addCharacter(this);
     }
 
     public List<Dream> getDreams() {
@@ -149,6 +167,25 @@ public class Human {
         addEnergy(-20);
         addHealth(10);
         return new Vomit(belly.pollLast());
+    }
+
+    public boolean isWet() {
+        return isWet;
+    }
+
+    public void getWet() {
+        isWet = true;
+        addEnergy(-15);
+        addEnergy(-10);
+    }
+
+    public void dryUp() {
+        isWet = false;
+    }
+
+    public boolean isProtectedFromGettingWet() {
+        // true if has a thing that can protect from the rain
+        return new Random().nextBoolean();
     }
 
     public void addHealth(int health) {

@@ -1,15 +1,15 @@
 package ru.webwitcher.uni.lab3.furniture;
 
-import ru.webwitcher.uni.lab3.enums.Room;
+import ru.webwitcher.uni.lab3.scene.Location;
 
 public abstract class Furniture {
-    private final Room room;
+    private final Location location;
 
-    public Furniture(Room room) {
-        this.room = room;
+    public Furniture(Location location) {
+        this.location = location;
     }
 
-    public Room getRoom() {
-        return room;
+    public Location getLocation() {
+        return location;
     }
 }

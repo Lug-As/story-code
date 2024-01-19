@@ -11,7 +11,7 @@ abstract public class FurnitureService<F extends Furniture> {
     }
 
     protected void checkLocation(Human user) {
-        if (!user.getLocation().equals(furniture.getRoom())) {
+        if (!user.getLocation().equals(furniture.getLocation())) {
             throw new RuntimeException("Нет доступа к мебели - не та комната.");
         }
     }
