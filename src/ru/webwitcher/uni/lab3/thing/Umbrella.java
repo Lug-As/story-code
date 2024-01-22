@@ -18,4 +18,8 @@ public class Umbrella extends Thing implements CanProtectFromRain {
     public void close() {
         isOpen = false;
     }
+
+    public boolean canProtectFromRain() {
+        return isOpen();
+    }
 }

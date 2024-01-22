@@ -1,7 +1,6 @@
 package ru.webwitcher.uni.lab3.enums;
 
 public enum Weather {
-    SUNNY,
     CLOUDY,
     RAINY(human -> {
         if (!human.isProtectedFromGettingWet()) {

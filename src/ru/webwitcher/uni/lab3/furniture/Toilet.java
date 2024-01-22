@@ -12,10 +12,6 @@ public class Toilet extends Furniture implements Container<Object> {
         super(location);
     }
 
-    public Object getContent() {
-        return content;
-    }
-
     public void fill(Object o) {
         content = o;
     }
@@ -37,10 +33,6 @@ public class Toilet extends Furniture implements Container<Object> {
     public void free(Human user) {
         semaphore.free(user);
         user.unblockPosition();
-    }
-
-    public boolean canUse(Human user) {
-        return semaphore.canUse(user);
     }
 
     public void ensureCanUse(Human user) {

@@ -2,7 +2,7 @@ package ru.webwitcher.uni.lab3.furniture;
 
 
 public class Grave implements Container<Coffin> {
-    private Coffin coffin = null;
+    private Coffin coffin;
 
     private boolean isOpen = true;
 

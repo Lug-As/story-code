@@ -62,8 +62,6 @@ public class Main {
 
         LocalDateTime firstDay = LocalDateTime.of(1982, 10, 13, 7, 12);
 
-        /////////////
-
         Scene firstDayScene = new Scene(currentScene -> {
             currentScene.setDateTime(firstDay);
             luis.cry();
@@ -99,6 +97,7 @@ public class Main {
             if (!result) {
                 luis.setCurrentEmotion(Emotion.SAD);
             }
+            mirrorService.uncoverMirror(luis);
 
             luis.goTo(bedroom);
             try {
@@ -123,8 +122,6 @@ public class Main {
 
         firstDayScene.play();
 
-        ///////////////////
-
         Human gage = new Human("Gage");
         gage.die();
 
@@ -145,25 +142,34 @@ public class Main {
         Human funeralDirector = new Human("Директор похоронного бюро");
         funeralDirector.goTo(cemetery);
 
+        Umbrella umbrella1 = new Umbrella(Color.BLACK);
+        Umbrella umbrella2 = new Umbrella(Color.BLACK);
+        Umbrella umbrella3 = new Umbrella(Color.BLACK);
 
-        //////////////////
+        umbrella1.open();
+        umbrella2.open();
+        umbrella3.open();
+
+        luis.getThings().add(umbrella1);
+        rachel.getThings().add(umbrella2);
+        funeralDirector.getThings().add(umbrella3);
+
+        cemetery.setWeather(Weather.RAINY);
 
         Scene secondDayScene = new Scene(currentScene -> {
-            currentScene.setDateTime(firstDay.plusDays(1));
+            currentScene.setDateTime(firstDay.plusDays(1).toLocalDate().atTime(14, 0));
             cemetery.setWeather(Weather.CLOUDY);
 
-            Umbrella umbrella1 = new Umbrella(Color.BLACK);
-            Umbrella umbrella2 = new Umbrella(Color.BLACK);
-            Umbrella umbrella3 = new Umbrella(Color.BLACK);
-
-            luis.getThings().add(umbrella1);
-            rachel.getThings().add(umbrella2);
-            funeralDirector.getThings().add(umbrella3);
+            umbrella1.close();
+            umbrella2.close();
+            umbrella3.close();
 
             funeralDirector.say("Пустите детей и не препятствуйте им приходить ко мне...");
 
             Location nearGrave = new Location("Возле могилы", cemetery);
             luis.goTo(nearGrave);
+
+            grave.coverUp();
         });
 
         secondDayScene.play();

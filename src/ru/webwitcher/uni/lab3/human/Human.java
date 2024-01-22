@@ -97,7 +97,7 @@ public class Human {
     }
 
     public boolean isPositionBlocked() {
-        return positionBlocked;
+        return positionBlocked || isSleeping() || !isAlive();
     }
 
     public PhysicalPosition getPhysicalPosition() {
@@ -192,14 +192,10 @@ public class Human {
         addHealth(-10);
     }
 
-    public void dryUp() {
-        isWet = false;
-    }
-
     public boolean isProtectedFromGettingWet() {
         for (Thing thing : things) {
             if (thing instanceof CanProtectFromRain) {
-                return true;
+                return ((CanProtectFromRain) thing).canProtectFromRain();
             }
         }
         return false;
