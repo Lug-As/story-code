@@ -6,20 +6,22 @@ import java.util.Set;
 public class Semaphore<U> {
     private final int totalSeats;
     private final Set<U> users;
+    private final Object resource;
 
-    public Semaphore(int totalSeats) {
+    public Semaphore(Object resource, int totalSeats) {
         this.totalSeats = totalSeats;
         this.users = new HashSet<>(totalSeats);
+        this.resource = resource;
     }
 
-    public Semaphore() {
-        this(1);
+    public Semaphore(Object resource) {
+        this(resource, 1);
     }
 
     public void occupy(U user) throws ResourceIsNotAvailableException {
         if (!users.contains(user)) {
             if (isBusy()) {
-                throw new ResourceIsNotAvailableException();
+                throw new ResourceIsNotAvailableException(resource);
             }
             users.add(user);
         }

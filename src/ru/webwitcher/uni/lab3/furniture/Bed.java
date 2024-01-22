@@ -9,7 +9,7 @@ public class Bed extends Furniture {
 
     public Bed(Location location, int totalSeats) {
         super(location);
-        this.semaphore = new Semaphore<>(totalSeats);
+        this.semaphore = new Semaphore<>(this, totalSeats);
     }
 
     public Bed(Location location) {
