@@ -11,7 +11,6 @@ import ru.webwitcher.uni.lab3.furniture.service.MirrorService;
 import ru.webwitcher.uni.lab3.furniture.service.ToiletService;
 import ru.webwitcher.uni.lab3.human.Dream;
 import ru.webwitcher.uni.lab3.human.Human;
-import ru.webwitcher.uni.lab3.scene.Action;
 import ru.webwitcher.uni.lab3.scene.Location;
 import ru.webwitcher.uni.lab3.scene.Scene;
 import ru.webwitcher.uni.lab3.thing.Color;
@@ -55,7 +54,7 @@ public class Main {
         try {
             bedService.lieDownOnBed(luis);
         } catch (ResourceIsNotAvailableException e) {
-            throw new RuntimeException("Кровать занята");
+            throw new RuntimeException(e.getMessage());
         }
         luis.sleep();
 
@@ -65,63 +64,61 @@ public class Main {
 
         /////////////
 
-        Scene firstDayScene = new Scene(new Action() {
-            public void action(Scene currentScene) {
-                currentScene.setDateTime(firstDay);
-                luis.cry();
-                luis.awake();
-                luis.setHealth(15);
-                luis.setEnergy(10);
-                bedService.getUpFromBed(luis);
+        Scene firstDayScene = new Scene(currentScene -> {
+            currentScene.setDateTime(firstDay);
+            luis.cry();
+            luis.awake();
+            luis.setHealth(15);
+            luis.setEnergy(10);
+            bedService.getUpFromBed(luis);
 
-                luis.goTo(bathroom);
-                luis.setPhysicalPosition(PhysicalPosition.KNELT);
+            luis.goTo(bathroom);
+            luis.setPhysicalPosition(PhysicalPosition.KNELT);
 
-                try {
-                    toiletService.occupyToilet(luis);
-                } catch (ResourceIsNotAvailableException e) {
-                    throw new RuntimeException("Туалет занят");
-                }
-                toiletService.fillToilet(luis, luis.threwUp());
-                while (luis.getEnergy() < 5) {
-                    try {
-                        Thread.sleep(100);
-                    } catch (InterruptedException e) {
-                        break;
-                    }
-                    if (random.nextBoolean()) {
-                        luis.addEnergy(1);
-                    }
-                }
-                luis.setPhysicalPosition(PhysicalPosition.STANDING);
-
-                toiletService.flushToilet(luis);
-                toiletService.freeToilet(luis);
-                boolean result = mirrorService.lookInMirror(luis);
-                if (!result) {
-                    luis.setCurrentEmotion(Emotion.SAD);
-                }
-
-                luis.goTo(bedroom);
-                try {
-                    bedService.lieDownOnBed(luis);
-                } catch (ResourceIsNotAvailableException e) {
-                    throw new RuntimeException("Кровать занята");
-                }
-                luis.promise(ImpossiblePromise.STOP_DRINKING_BEER);
-                luis.setCurrentEmotion(Emotion.DEPRESSIVE);
-                try {
-                    bedService.sitDownOnBed(luis);
-                } catch (ResourceIsNotAvailableException e) {
-                    throw new RuntimeException("Кровать занята");
-                }
-                for (int i = dreams.size() - 1; i >= 0; i--) {
-                    Dream dream = dreams.get(i);
-                    System.out.println(dream + " не получится");
-                    dreams.remove(dream);
-                }
-                luis.setEnergy(0);
+            try {
+                toiletService.occupyToilet(luis);
+            } catch (ResourceIsNotAvailableException e) {
+                throw new RuntimeException(e.getMessage());
             }
+            toiletService.fillToilet(luis, luis.threwUp());
+            while (luis.getEnergy() < 5) {
+                try {
+                    Thread.sleep(100);
+                } catch (InterruptedException e) {
+                    break;
+                }
+                if (random.nextBoolean()) {
+                    luis.addEnergy(1);
+                }
+            }
+            luis.setPhysicalPosition(PhysicalPosition.STANDING);
+
+            toiletService.flushToilet(luis);
+            toiletService.freeToilet(luis);
+            boolean result = mirrorService.lookInMirror(luis);
+            if (!result) {
+                luis.setCurrentEmotion(Emotion.SAD);
+            }
+
+            luis.goTo(bedroom);
+            try {
+                bedService.lieDownOnBed(luis);
+            } catch (ResourceIsNotAvailableException e) {
+                throw new RuntimeException(e.getMessage());
+            }
+            luis.promise(ImpossiblePromise.STOP_DRINKING_BEER);
+            luis.setCurrentEmotion(Emotion.DEPRESSIVE);
+            try {
+                bedService.sitDownOnBed(luis);
+            } catch (ResourceIsNotAvailableException e) {
+                throw new RuntimeException(e.getMessage());
+            }
+            for (int i = dreams.size() - 1; i >= 0; i--) {
+                Dream dream = dreams.get(i);
+                System.out.println(dream + " не получится");
+                dreams.remove(dream);
+            }
+            luis.setEnergy(0);
         });
 
         firstDayScene.play();

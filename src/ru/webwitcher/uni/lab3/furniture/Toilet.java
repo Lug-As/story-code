@@ -6,7 +6,7 @@ import ru.webwitcher.uni.lab3.scene.Location;
 public class Toilet extends Furniture implements Container<Object> {
     private Object content = null;
 
-    private final Semaphore<Human> semaphore = new Semaphore<>();
+    private final Semaphore<Human> semaphore = new Semaphore<>(this);
 
     public Toilet(Location location) {
         super(location);

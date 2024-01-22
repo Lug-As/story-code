@@ -114,7 +114,7 @@ public class Human {
 
     public void goTo(Location location) {
         if (isPositionBlocked()) {
-            throw new PositionBlockedException();
+            throw new PositionBlockedException(this);
         }
         if (this.location != null) {
             this.location.removeCharacter(this);
@@ -189,7 +189,7 @@ public class Human {
     public void getWet() {
         isWet = true;
         addEnergy(-15);
-        addEnergy(-10);
+        addHealth(-10);
     }
 
     public void dryUp() {
