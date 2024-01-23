@@ -3,7 +3,7 @@ package ru.webwitcher.uni.lab3.food;
 import ru.webwitcher.uni.lab3.human.Human;
 
 public class Beer implements Food {
-    public void digest(Human consumer) {
+    public void applyEffect(Human consumer) {
         if (consumer.getAlcoholLevel() < 0.9f) {
             consumer.addEnergy(10);
         } else {

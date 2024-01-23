@@ -1,7 +1,5 @@
 package ru.webwitcher.uni.lab3.scene;
 
-import ru.webwitcher.uni.lab3.enums.Weather;
-import ru.webwitcher.uni.lab3.enums.WeatherEffect;
 import ru.webwitcher.uni.lab3.human.Human;
 
 import java.util.ArrayList;
@@ -26,25 +24,37 @@ public class Location {
         this.parentLocation = parentLocation;
     }
 
-    public void setWeather(Weather weather) {
-        this.weather = weather;
-        characters.forEach(this::applyWeatherEffect);
+    public String getName() {
+        return name;
     }
 
-    private void applyWeatherEffect(Human human) {
+    public void setWeather(Weather weather) {
+        this.weather = weather;
+        characters.forEach(this::applyWeatherEntranceEffect);
+    }
+
+    private void applyWeatherEntranceEffect(Human human) {
         if (weather != null && weather.hasEffect()) {
             WeatherEffect effect = weather.getEffect();
-            effect.apply(human);
+            effect.applyEntranceEffect(human);
+        }
+    }
+
+    private void applyWeatherExitEffect(Human human) {
+        if (weather != null && weather.hasEffect()) {
+            WeatherEffect effect = weather.getEffect();
+            effect.applyExitEffect(human);
         }
     }
 
     public void addCharacter(Human human) {
         characters.add(human);
-        applyWeatherEffect(human);
+        applyWeatherEntranceEffect(human);
     }
 
     public void removeCharacter(Human human) {
         characters.remove(human);
+        applyWeatherExitEffect(human);
     }
 
     public boolean equals(Object o) {

@@ -1,7 +1,7 @@
 package ru.webwitcher.uni.lab3.furniture;
 
-import ru.webwitcher.uni.lab3.enums.PhysicalPosition;
 import ru.webwitcher.uni.lab3.human.Human;
+import ru.webwitcher.uni.lab3.human.PhysicalPosition;
 import ru.webwitcher.uni.lab3.scene.Location;
 
 public class Bed extends Furniture {
