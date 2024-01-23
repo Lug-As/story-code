@@ -1,18 +1,14 @@
 package ru.webwitcher.uni.lab3;
 
-import ru.webwitcher.uni.lab3.enums.Emotion;
-import ru.webwitcher.uni.lab3.enums.ImpossiblePromise;
-import ru.webwitcher.uni.lab3.enums.PhysicalPosition;
-import ru.webwitcher.uni.lab3.enums.Weather;
 import ru.webwitcher.uni.lab3.food.Beer;
 import ru.webwitcher.uni.lab3.furniture.*;
 import ru.webwitcher.uni.lab3.furniture.service.BedService;
 import ru.webwitcher.uni.lab3.furniture.service.MirrorService;
 import ru.webwitcher.uni.lab3.furniture.service.ToiletService;
-import ru.webwitcher.uni.lab3.human.Dream;
-import ru.webwitcher.uni.lab3.human.Human;
+import ru.webwitcher.uni.lab3.human.*;
 import ru.webwitcher.uni.lab3.scene.Location;
 import ru.webwitcher.uni.lab3.scene.Scene;
+import ru.webwitcher.uni.lab3.scene.Weather;
 import ru.webwitcher.uni.lab3.thing.Color;
 import ru.webwitcher.uni.lab3.thing.Umbrella;
 
@@ -135,7 +131,6 @@ public class Main {
         bedService.getUpFromBed(luis);
         luis.goTo(cemetery);
         rachel.goTo(cemetery);
-        gage.goTo(cemetery);
 
         Human irvin = new Human("Ирвин");
         irvin.goTo(cemetery);

@@ -1,8 +1,5 @@
 package ru.webwitcher.uni.lab3.human;
 
-import ru.webwitcher.uni.lab3.enums.Emotion;
-import ru.webwitcher.uni.lab3.enums.ImpossiblePromise;
-import ru.webwitcher.uni.lab3.enums.PhysicalPosition;
 import ru.webwitcher.uni.lab3.food.Food;
 import ru.webwitcher.uni.lab3.scene.Location;
 import ru.webwitcher.uni.lab3.thing.CanProtectFromRain;
@@ -40,7 +37,7 @@ public class Human {
 
     private boolean isWet = false;
 
-    private final List<Thing> things = new ArrayList<>();
+    private final Set<Thing> things = new HashSet<>();
 
     public Human(String name) {
         this.name = name;
@@ -170,7 +167,7 @@ public class Human {
         }
 
         private void addFood(Food food) {
-            food.digest(Human.this);
+            food.applyEffect(Human.this);
             content.add(food);
         }
     }
@@ -190,6 +187,10 @@ public class Human {
         isWet = true;
         addEnergy(-15);
         addHealth(-10);
+    }
+
+    public void dryUp() {
+        isWet = false;
     }
 
     public boolean isProtectedFromGettingWet() {
@@ -213,7 +214,7 @@ public class Human {
         setAlcoholLevel(getAlcoholLevel() + alcoholLevel);
     }
 
-    public List<Thing> getThings() {
+    public Set<Thing> getThings() {
         return things;
     }
 

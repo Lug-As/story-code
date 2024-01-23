@@ -33,7 +33,7 @@ public class Semaphore<U> {
 
     public void ensureCanUse(U user) {
         if (!canUse(user)) {
-            throw new RuntimeException("Данный пользователь не может использовать ресурс");
+            throw new AccessDeniedException(resource);
         }
     }
 
